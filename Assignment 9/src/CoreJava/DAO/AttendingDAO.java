@@ -94,7 +94,7 @@ public class AttendingDAO {
 			writer.close(); 	
 			
 		} catch (IOException e) {
-			e.printStackTrace();
+			System.out.println("Cannot write to file. Please try again");
 		}
     }
 
