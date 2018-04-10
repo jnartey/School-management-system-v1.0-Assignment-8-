@@ -50,22 +50,10 @@ public class AttendingDAO {
     		}
     	}
     	
-    	//If the Student is not attending that Course, add a new Attending object with the Student’s Email and Course ID to the List attending.csv.
+    	//If the Student is not attending that Course, add a new Attending object with the Student's Email and Course ID to the List attending.csv.
     	if(isAttending == false) {
-			
-			try {		
-				//Instantiating FileWriter to write to file
-				FileWriter writer = new FileWriter(file, true); //Append true and overwrite is false
-				
-				//Write to file in CSV format
-				writer.write(courseID + "," + studentEmail + "\r\n");
-				
-				//Close file after writing
-				writer.close(); 	
-				
-			} catch (IOException e) {
-				e.printStackTrace();
-			}
+    		attending.add(new Attending(courseID, studentEmail));
+			this.saveAttending(attending);
     	}
     }
 
@@ -90,6 +78,12 @@ public class AttendingDAO {
     	try {	
 			//Instantiating FileWriter to write to file
 			FileWriter writer = new FileWriter(filePath); //Overwrite is true
+			
+			//Clearing data
+			writer.write("");
+			writer.close();
+			
+			writer = new FileWriter(filePath);
 			
 			//Writing to file in CSV format line by line using a for loop
 			for(Attending data : attending) {
